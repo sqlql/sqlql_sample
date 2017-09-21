@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   def create
     user = User.new(user_param)
+    user.key = SecureRandom.uuid
 
     if user.save
       render json: { key: user.key }, status: :created
