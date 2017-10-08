@@ -1,0 +1,7 @@
+{
+    "name" : "SQLQL sample",
+    "description" : "SQLQL ",
+    "repository" : "https://github.com/yancya/sqlql-sample",
+    "scripts" : { "postdeploy" : "bundle exec rails db:migrate db:seed" },
+    "keywords" : ["rails", "sql", "sqlql"]
+}
