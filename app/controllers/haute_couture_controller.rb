@@ -2,10 +2,10 @@ class HauteCoutureController < ApplicationController
   before_action :authenticate
 
   def show
-    result = HauteCouture.find_by_sql(
-      query: haute_couture_params['query'],
-      user: @user
-    )
+    query = haute_couture_params['query']
+    query_string = HauteCouture.sql(query: query, user: @user)
+    HauteCouture.check_sql(query_string)
+    result = HauteCouture.find_by_sql(query_string)
     render json: result
   end
 
