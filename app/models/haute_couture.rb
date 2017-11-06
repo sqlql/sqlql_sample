@@ -9,12 +9,12 @@ module HauteCouture
     SQL
   end
 
-  def find_by_sql(query:, user:)
-    ActiveRecord::Base.connection.execute(sql(query: query, user: user)).first['result'] || '[]'
+  def find_by_sql(query)
+    ActiveRecord::Base.connection.execute(query).first['result'] || '[]'
   end
 
-  def check_sql(query:, user:)
-    gp_query = PgQuery.parse(sql(query: query, user: user))
+  def check_sql(query)
+    gp_query = PgQuery.parse(query)
     raise if pg_query.tree.count > 1
     raise if pg_query.tree.any?{|n| !(n["RawStmt"]["stmt"]["DropStmt"].nil?) }
   end

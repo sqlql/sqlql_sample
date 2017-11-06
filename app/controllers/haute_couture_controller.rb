@@ -3,11 +3,9 @@ class HauteCoutureController < ApplicationController
 
   def show
     query = haute_couture_params['query']
-    HauteCouture.check_sql(query: query, user: @user)
-    result = HauteCouture.find_by_sql(
-      query: query,
-      user: @user
-    )
+    query_string = HauteCouture.sql(query: query, user: @user)
+    HauteCouture.check_sql(query_string)
+    result = HauteCouture.find_by_sql(query_string)
     render json: result
   end
 
