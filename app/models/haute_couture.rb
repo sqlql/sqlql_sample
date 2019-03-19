@@ -14,7 +14,7 @@ module HauteCouture
   end
 
   def check_sql(query)
-    gp_query = PgQuery.parse(query)
+    pg_query = PgQuery.parse(query)
     raise if pg_query.tree.count > 1
     raise if pg_query.tree.any?{|n| !(n["RawStmt"]["stmt"]["DropStmt"].nil?) }
   end
